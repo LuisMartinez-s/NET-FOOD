@@ -1,0 +1,22 @@
+<div class = "card card-body">
+    <form (ngSubmit)="addProduct()">
+
+        <div class="form-group">
+            <input type ="text" name="name"[(ngModel)]="product.name" class ="form-control" placeholder="Product Name">
+        </div>
+        <div class="form-group">
+            <input type ="text" name="description"[(ngModel)]="product.description"class ="form-control"placeholder="Product Description">
+        </div>
+        <div class="form-group">
+            <input type ="number" name="price"[(ngModel)]="product.price" step ="0.01"class ="form-control"placeholder="Product Price">
+        </div>
+       
+        
+        
+    
+        <button type ="submit"class="btn btn-dark btn-block">
+            Save
+        </button>
+    
+    </form>
+</div>
