@@ -1,14 +1,22 @@
-<nav class="navbar navbar-dark bg-dark">
-    <a class="navbar-brand" href="/">Angular FireStore</a>
-</nav>
 
+
+
+ <button type="button" class="btn btn-warning" (click) ="res=!res">Registro</button>
 <div class ="container pt-4">
+    
     <div class="row">
         <div class="col-md-5">
-            <app-product-form></app-product-form>
+            
+            <app-restaurante-form *ngIf="res"></app-restaurante-form>
         </div>
         <div class="col-md-7">
-            <app-products></app-products>
+            <app-restaurante *ngIf="res"></app-restaurante>
         </div>
     </div>
 </div>
+
+
+
+<button routerLink="/map">Mostrar Mapa</button>
+   <router-outlet></router-outlet>
+

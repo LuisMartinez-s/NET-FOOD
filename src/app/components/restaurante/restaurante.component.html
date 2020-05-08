@@ -1,0 +1,46 @@
+<div *ngIf = "restaurantes.length > 0; else norestaurante">
+    <ul class ="list-group">
+        <li *ngFor = "let p of restaurantes" class="list-group-item list-group-item-action">
+            <h3>{{p.name}}</h3>
+            <h5>{{p.lat}}</h5>
+            <h5>{{p.lng}}</h5>
+           
+
+            <button (click)="deleteRestaurante($event,p)"class ="btn btn-danger">
+                Delete
+            </button>
+            <button (click)="editRestaurante($event,p)"class ="btn btn-secondary">
+                Edit
+            </button>
+            <div *ngIf ="editing && editingRes.id == p.id">
+                <form (ngSubmit)="updateRestaurante()">
+                    <div class="form-group mt-3">
+                        <input type="text" name="name" [(ngModel)]="editingRes.name"class ="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" name ="latitud"[(ngModel)]="editingRes.lat"class ="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text"name ="longitud" [(ngModel)]="editingRes.lng"class ="form-control">
+                    </div>
+                   
+                    
+                    
+
+                    <button type ="submit"class="btn btn-success btn-block">
+                        Update
+                    </button>
+                </form>
+            </div>
+    
+        </li>
+    </ul>
+    
+</div>
+
+<ng-template #norestaurante>
+    <p>Aún no se agregaron los restaurantes.</p>
+
+</ng-template>

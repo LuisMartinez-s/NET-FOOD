@@ -10,18 +10,29 @@ import { ProductsComponent } from './components/products/products.component';
 import { AngularFireModule} from '@angular/fire';
 import { environment } from '../environments/environment'
 import { AngularFirestoreModule} from '@angular/fire/firestore'
+import {GoogleMapsModule} from '@angular/google-maps';
+import {HeroLoaderModule} from '@herodevs/hero-loader';
+import { RestauranteFormComponent } from './components/restaurante-form/restaurante-form.component';
+import { RestauranteComponent } from './components/restaurante/restaurante.component';
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
     ProductFormComponent,
-    ProductsComponent
+    ProductsComponent,
+    RestauranteFormComponent,
+    RestauranteComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-    FormsModule
+    FormsModule,
+    GoogleMapsModule,
+    HeroLoaderModule
   ],
   providers: [],
   bootstrap: [AppComponent]
