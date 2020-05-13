@@ -1,7 +1,7 @@
 import { Component, OnInit,ViewChild,AfterViewInit } from '@angular/core';
 import { RestauranteService} from '../../services/restaurante.service'
 import { Restaurante } from 'src/app/models/restaurante';
-
+import { Platillos } from 'src/app/models/platillos';
 
 
 
@@ -16,6 +16,7 @@ export class RestauranteFormComponent implements OnInit {
   nombreRes:string
   latitud : number
   longitud : number
+  
 
   constructor(public restauranteService:RestauranteService) { 
 
@@ -32,9 +33,8 @@ export class RestauranteFormComponent implements OnInit {
     }
     
   }
-  buscaRestaurante(event,restaurante){
-
-    this.restauranteService.consultaRestaurante(restaurante)
+  buscaRestaurante(event, restaurante){
+    this.restauranteService.consultaPorPrecio(restaurante)
     this.restauranteService.getRestaurantes().subscribe(restaurante =>{
       console.log(restaurante)
       this.restaurante = restaurante as Restaurante;

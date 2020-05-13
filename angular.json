@@ -14,7 +14,6 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist/angular-firestore",
-  
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -31,18 +30,14 @@
               "src/bs/animate.css/animate.min.css",
               "src/bs/font-awesome/css/font-awesome.min.css",
               "src/bs/owl.carousel/assets/owl.carousel.min.css"
-              
-
             ],
             "scripts": [
               "src/bs/jquery/jquery.min.js",
               "src/bs/bootstrap/js/bootstrap.bundle.min.js",
               "src/bs/jquery.easing/jquery.easing.min.js",
               "src/bs/scrollreveal/scrollreveal.min.js",
-              "src/bs/owl.carousel/owl.carousel.min.js",  
+              "src/bs/owl.carousel/owl.carousel.min.js",
               "src/js/main.js"
-             
-             
             ]
           },
           "configurations": {
@@ -136,6 +131,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "angular-firestore"
+    }
+  },
+  "defaultProject": "angular-firestore",
+  "cli": {
+    "analytics": false
+  }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import{ RestauranteService}  from '../../services/restaurante.service'
 import { Restaurante } from 'src/app/models/restaurante';
-
+import { Platillos } from 'src/app/models/platillos';
 
 
 @Component({
@@ -11,12 +11,18 @@ import { Restaurante } from 'src/app/models/restaurante';
 })
 export class RestauranteComponent implements OnInit {
 
+  platillo={}as Platillos
   //Arreglo para guardar restauranres y llamarlo en el html
   restaurantes=[];
   //Editar el restaurante
   editingRes:Restaurante;
   //Verifica si presionó edit
   editing = false;
+  //Añadir platillos
+  addPlatillos:Restaurante;  
+  //Verifica si presionó añadir platillo
+  adding: Boolean = false;
+
 
   constructor(public restauranteService:RestauranteService) {
 
@@ -48,6 +54,19 @@ export class RestauranteComponent implements OnInit {
     this.editingRes = {} as Restaurante;
     this.editing = false;
   }
- 
+
+  anadirPlatillo(event,restaurante){
+    console.log(restaurante)
+    this.addPlatillos=restaurante;
+    this.adding = !this.adding;
+  }
+
+  addsPlatillo(){
+    console.log(this.addPlatillos)
+    this.restauranteService.addPlatillo(this.addPlatillos,this.platillo);
+    this.addPlatillos={}as Restaurante;
+    this.platillo={} as Platillos
+    this.adding=false;
+  }
 
 }

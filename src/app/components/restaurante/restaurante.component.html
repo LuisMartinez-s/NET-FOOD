@@ -1,43 +1,70 @@
-<div *ngIf = "restaurantes.length > 0; else norestaurante">
-    <ul class ="list-group">
-        <li *ngFor = "let p of restaurantes" class="list-group-item list-group-item-action">
+<div *ngIf="restaurantes.length > 0; else norestaurante">
+    <ul class="list-group">
+        <li *ngFor="let p of restaurantes" class="list-group-item list-group-item-action">
             <h3>{{p.name}}</h3>
             <h5>{{p.lat}}</h5>
             <h5>{{p.lng}}</h5>
-           
 
-            <button (click)="deleteRestaurante($event,p)"class ="btn btn-danger">
+            <button (click)="anadirPlatillo($event,p)" class="btn btn-secondary">
+                Añadir platillos
+            </button>
+            <div *ngIf="adding && addPlatillos.id == p.id">
+                <form (ngSubmit)="addsPlatillo()">
+                    <div class="form-group mt-3">
+                        Nombre platillo:
+                        <br>
+                        <input type="text" name="namePlat" class="form-control" [(ngModel)]="platillo.nombre" placeholder="Nombre platillo">
+                    </div>
+                    <div class="form-group">
+                        Descripción platillo:
+                        <br>
+                        <input type="text" name="descPlat" class="form-control" [(ngModel)]="platillo.descripcion" placeholder="Descripción del platillo">
+                    </div>
+                    <div class="form-group">
+                        Precio platillo:
+                        <br>
+                        <input type="text" name="pricePlat" class="form-control" [(ngModel)]="platillo.precio" placeholder="Precio">
+                    </div>
+                    <button type="submit" class="btn btn-success btn-block">
+                        Añadir platillo
+                    </button>
+
+                </form>
+
+            </div>
+            <button (click)="deleteRestaurante($event,p)" class="btn btn-danger">
                 Delete
             </button>
-            <button (click)="editRestaurante($event,p)"class ="btn btn-secondary">
+            <button (click)="editRestaurante($event,p)" class="btn btn-secondary">
                 Edit
             </button>
-            <div *ngIf ="editing && editingRes.id == p.id">
+            <div *ngIf="editing && editingRes.id == p.id">
                 <form (ngSubmit)="updateRestaurante()">
                     <div class="form-group mt-3">
-                        <input type="text" name="name" [(ngModel)]="editingRes.name"class ="form-control">
+                        <input type="text" name="name" [(ngModel)]="editingRes.name" class="form-control">
                     </div>
 
                     <div class="form-group">
-                        <input type="text" name ="latitud"[(ngModel)]="editingRes.lat"class ="form-control">
+                        <input type="text" name="latitud" [(ngModel)]="editingRes.lat" class="form-control">
                     </div>
 
                     <div class="form-group">
-                        <input type="text"name ="longitud" [(ngModel)]="editingRes.lng"class ="form-control">
+                        <input type="text" name="longitud" [(ngModel)]="editingRes.lng" class="form-control">
                     </div>
-                   
-                    
-                    
 
-                    <button type ="submit"class="btn btn-success btn-block">
+                    <button type="submit" class="btn btn-success btn-block">
                         Update
                     </button>
+
                 </form>
+
             </div>
-    
+
+
+
         </li>
     </ul>
-    
+
 </div>
 
 <ng-template #norestaurante>
