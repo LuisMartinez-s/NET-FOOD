@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore'
+import { AngularFirestore, AngularFirestoreCollectionGroup, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore'
 import { Observable } from 'rxjs';
 import { Restaurante } from 'src/app/models/restaurante';
 import { Platillos } from 'src/app/models/platillos';
@@ -12,6 +12,7 @@ import { database } from 'firebase';
 export class RestauranteService {
 
   restaurantesCollection: AngularFirestoreCollection<Restaurante>;
+  restaurantesCollectionG:AngularFirestoreCollectionGroup<Restaurante>;
   restaurantes: Observable<Restaurante[]>;
   restauranteDoc: AngularFirestoreDocument<Restaurante>;
 
@@ -55,18 +56,16 @@ export class RestauranteService {
 
 
   //Consulta Restaurante
-  consultaRestaurante(nombre: string) {
-
-    this.restaurantesCollection = this.db.collection('restaurante', ref => ref.where('name', '==', nombre));
-    this.restaurantes = this.restaurantesCollection.snapshotChanges().pipe(map(actions => {
-      return actions.map(a => {
+  consultaRestaurante(precio: string) {
+    this.restaurantesCollectionG = this.db.collectionGroup('platillos',ref => ref.where("precio", "<=", precio));
+    this.restaurantes = this.restaurantesCollectionG.snapshotChanges().pipe(map(actions=>{
+      return actions.map(a=>{
         //as Product hace referencia a la interfaz en products.ts
         const data = a.payload.doc.data() as Restaurante
         data.id = a.payload.doc.id;
         return data;
       })
     }));
-
   }
 
   addPlatillo(res: Restaurante, platillo: Platillos) {
@@ -78,18 +77,5 @@ export class RestauranteService {
 
   }
 
-  consultaPorPrecio(precio: number) {
-
-    this.restaurantesCollection = this.db.collection('restaurante', ref => ref.where('platillo.precio', '==', precio));
-    this.restaurantes = this.restaurantesCollection.snapshotChanges().pipe(map(actions => {
-      return actions.map(a => {
-        //as Product hace referencia a la interfaz en products.ts
-        const data = a.payload.doc.data() as Restaurante
-        data.id = a.payload.doc.id;
-        return data;
-      })
-    }));
-
-  }
 
 }

@@ -34,7 +34,7 @@ export class RestauranteFormComponent implements OnInit {
     
   }
   buscaRestaurante(event, restaurante){
-    this.restauranteService.consultaPorPrecio(restaurante)
+    this.restauranteService.consultaRestaurante(restaurante)
     this.restauranteService.getRestaurantes().subscribe(restaurante =>{
       console.log(restaurante)
       this.restaurante = restaurante as Restaurante;
