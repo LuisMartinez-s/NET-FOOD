@@ -24,6 +24,7 @@ export class RestauranteFormComponent implements OnInit {
   
 
   ngOnInit(): void {
+    
   }
 
   addRestaurante(){
@@ -38,6 +39,8 @@ export class RestauranteFormComponent implements OnInit {
     this.restauranteService.getRestaurantes().subscribe(restaurante =>{
       console.log(restaurante)
       this.restaurante = restaurante as Restaurante;
+      
+    
       
     })
 

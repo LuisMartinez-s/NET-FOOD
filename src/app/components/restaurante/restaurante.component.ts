@@ -4,6 +4,7 @@ import { Restaurante } from 'src/app/models/restaurante';
 import { Platillos } from 'src/app/models/platillos';
 
 
+
 @Component({
   selector: 'app-restaurante',
   templateUrl: './restaurante.component.html',
@@ -22,6 +23,7 @@ export class RestauranteComponent implements OnInit {
   addPlatillos:Restaurante;  
   //Verifica si presionó añadir platillo
   adding: Boolean = false;
+  restaurante = {} as Restaurante
 
 
   constructor(public restauranteService:RestauranteService) {
@@ -34,6 +36,7 @@ export class RestauranteComponent implements OnInit {
     this.restauranteService.getRestaurantes().subscribe(restaurantes =>{
       console.log(restaurantes)
       this.restaurantes = restaurantes;
+      
     })
   }
 
@@ -45,7 +48,13 @@ export class RestauranteComponent implements OnInit {
 
   editRestaurante(event,restaurante){
     this.editingRes = restaurante;
+    this.restauranteService.getProm(restaurante)
+    this.restauranteService.getRestaurantes().subscribe(platillo =>{
+      console.log(platillo)
+      this.platillo = platillo as Platillos;
+    })
     this.editing = !this.editing;
+    
 
   }
 
@@ -57,16 +66,20 @@ export class RestauranteComponent implements OnInit {
 
   anadirPlatillo(event,restaurante){
     console.log(restaurante)
+    
     this.addPlatillos=restaurante;
     this.adding = !this.adding;
+    
   }
 
   addsPlatillo(){
     console.log(this.addPlatillos)
+    
     this.restauranteService.addPlatillo(this.addPlatillos,this.platillo);
     this.addPlatillos={}as Restaurante;
     this.platillo={} as Platillos
     this.adding=false;
+    
   }
 
 }

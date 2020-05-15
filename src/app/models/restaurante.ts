@@ -5,5 +5,7 @@ export interface Restaurante {
     name?:string;
     lat?:number;
     lng?:number;
+    prom?:number;
+    cantidad?:number;
     platillos?:Array<Platillos>;
 }
