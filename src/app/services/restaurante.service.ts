@@ -7,6 +7,8 @@ import { map } from 'rxjs/operators';
 import { database } from 'firebase';
 import * as firebase from 'firebase';
 
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -37,12 +39,11 @@ export class RestauranteService {
     }));
   }
  
-
+  //Método que retorna todos los Restaurantes
   getRestaurantes() {
     return this.restaurantes
   }
-
-  //Agregar Restaurante
+  //Método que permite Agregar Restaurante
   addRestaurante(restaurante: Restaurante) {
     this.restaurantesCollection.add({
       'name': restaurante.name,
@@ -54,9 +55,8 @@ export class RestauranteService {
 
     
   }
-
   //Promedio de precio
-  
+  //Metodo que obtiene los platillos de un Restaurante
   getProm(restaurante:Restaurante){
     var prom = 0 
     this.platillosCollectionG = this.db.collectionGroup('platillos',ref=>ref.firestore.collectionGroup(`${restaurante.id}`));
@@ -71,24 +71,18 @@ export class RestauranteService {
 
    
   }
- 
-
-
-
-  //Eliminar Restaurante
+  //Método que permite Eliminar Restaurante
   deleteRestaurante(restaurante: Restaurante) {
     //Obtiene el id del Restaurante
     this.restauranteDoc = this.db.doc(`restaurante/${restaurante.id}`);
     this.restauranteDoc.delete()
   }
-
+//Método que permite Actualizar Restaurante
   updateRestaurante(restaurante: Restaurante) {
     this.restauranteDoc = this.db.doc(`restaurante/${restaurante.id}`);
     this.restauranteDoc.update(restaurante);
   }
-
-
-  //Consulta Restaurante
+  //Método que permite Consultar Restaurante
   consultaRestaurante(precio: string) {
     /*this.restaurantesCollectionG = this.db.collectionGroup('platillos',ref => ref.where("precio", "<=", precio));
     this.restaurantes = this.restaurantesCollectionG.snapshotChanges().pipe(map(actions=>{
@@ -108,15 +102,9 @@ export class RestauranteService {
         return data;
       })
     }));
-  
-
-
-
   }
 
-  
-  
-
+  //Método que permite agregar platillo a  Restaurante 
   addPlatillo(res: Restaurante, platillo: Platillos) {
     var prom = 0
     var anadirplatillo= this.db.collection('restaurante/' + res.id + '/platillos').add({
@@ -129,17 +117,7 @@ export class RestauranteService {
     res.cantidad++;
     res.prom = res.prom/res.cantidad
     this.updateRestaurante(res)
-    
-    
-
-    
-    
-    
-    
-
     //console.log(platillo.precio)
 
   }
-
-
 }
