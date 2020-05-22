@@ -7,5 +7,6 @@ export interface Restaurante {
     lng?:number;
     prom?:number;
     cantidad?:number;
+    total?:number;
     platillos?:Array<Platillos>;
 }

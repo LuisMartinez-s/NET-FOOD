@@ -22,6 +22,7 @@ export class RestauranteService {
   platillos: Observable<Platillos[]>;
   platillosA: Platillos[]
   restauranteDoc: AngularFirestoreDocument<Restaurante>;
+  platillosDoc: AngularFirestoreDocument<Platillos>;
   prom = 0;
 
   constructor(public db: AngularFirestore) {
@@ -43,6 +44,9 @@ export class RestauranteService {
   getRestaurantes() {
     return this.restaurantes
   }
+
+
+
   //Método que permite Agregar Restaurante
   addRestaurante(restaurante: Restaurante) {
     this.restaurantesCollection.add({
@@ -50,7 +54,8 @@ export class RestauranteService {
       'lat': restaurante.lat,
       'lng': restaurante.lng,
       'prom':0,
-      'cantidad':0
+      'cantidad':0,
+      'total':0
     });
 
     
@@ -113,11 +118,47 @@ export class RestauranteService {
       'precio': platillo.precio
       
     });
-    res.prom+=platillo.precio
+
+    res.total+=platillo.precio
+    res.prom = 0
     res.cantidad++;
-    res.prom = res.prom/res.cantidad
+    res.prom = res.total/res.cantidad
     this.updateRestaurante(res)
     //console.log(platillo.precio)
 
   }
+
+
+//Eliminar platillos
+deletePlatillo(res: Restaurante, platillo: Platillos) {
+  var prom = 0
+  this.db.doc('restaurante/' + res.id + '/platillos/'+platillo.id).delete()
+   
+
+  //res.prom-=platillo.precio
+  res.total-=platillo.precio
+  res.prom = 0
+  res.cantidad--;
+  res.prom = res.total/res.cantidad
+  this.updateRestaurante(res)
+  //console.log(platillo.precio)
+
+}
+
+
+//Obtener todos los platillos
+getPlatillos(res: Restaurante){
+  this.platillosCollection = this.db.collection(`restaurante/${res.id}/platillos`);
+    this.platillos = this.platillosCollection.snapshotChanges().pipe(map(actions => {
+      return actions.map(a => {
+        const data = a.payload.doc.data() as Platillos
+        data.id = a.payload.doc.id;
+        return data;
+      })
+    }));
+    return this.platillos
+}
+
+
+
 }

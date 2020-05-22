@@ -8,6 +8,7 @@
             <button (click)="anadirPlatillo($event,p)" class="btn btn-secondary">
                 Añadir platillos
             </button>
+            
             <div *ngIf="adding && addPlatillos.id == p.id">
                 <form (ngSubmit)="addsPlatillo()">
                     <div class="form-group mt-3">
@@ -25,11 +26,27 @@
                         <br>
                         <input type="number" name="pricePlat" class="form-control" [(ngModel)]="platillo.precio" placeholder="Precio">
                     </div>
-                    <button type="submit" class="btn btn-success btn-block">
+                    <button type="submit" class="btn btn-success btn-block mb-2">
                         Añadir platillo
                     </button>
 
+                    
+
                 </form>
+
+               
+                <button (click)="getPlatillos($event,p)" class="btn btn-secondary btn-block mb-5">
+                    Mostrar platillos
+                </button>
+
+                <ul class="list-group">
+                    <li *ngFor="let pl of platillos_a" class="list-group-item list-group-item-action">
+                        <h5>{{pl.nombre}}</h5>
+                        <button (click)="deletePlatillo($event,p,pl)" class="btn btn-danger">
+                            Eliminar
+                        </button>
+                    </li>
+                </ul>
 
             </div>
             <button (click)="deleteRestaurante($event,p)" class="btn btn-danger">
