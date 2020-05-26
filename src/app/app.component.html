@@ -6,7 +6,13 @@
     
     <div class="row">
         <div class="col-md-5">
-            
+            <div class="form-group">
+                <input type ="number" name="buscar"[(ngModel)]="precio" class ="form-control" placeholder="Buscar Restaurante">
+            </div>
+            <button class ="btn btn-danger" (click)="buscaRestaurante($event,precio)">
+               Buscar
+            </button>
+
             <app-restaurante-form *ngIf="res"></app-restaurante-form>
         </div>
         <div class="col-md-7">

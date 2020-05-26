@@ -38,6 +38,7 @@ export class RestauranteService {
         return data;
       })
     }));
+    
   }
  
   //Método que retorna todos los Restaurantes
@@ -107,6 +108,7 @@ export class RestauranteService {
         return data;
       })
     }));
+    return this.restaurantes;
   }
 
   //Método que permite agregar platillo a  Restaurante 
