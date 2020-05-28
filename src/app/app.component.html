@@ -1,17 +1,14 @@
+<hr>
+<div class="container">
+    <div class="form-group">
+        <button type="button" class="btn btn-warning container" (click)="res=!res">Registrar restaurante</button>
+    </div>
 
-
-
- <button type="button" class="btn btn-warning" (click) ="res=!res">Registro</button>
-<div class ="container pt-4">
-    
+</div>
+<div class="container pt-4">
     <div class="row">
         <div class="col-md-5">
-            <div class="form-group">
-                <input type ="number" name="buscar"[(ngModel)]="precio" class ="form-control" placeholder="Ingresa tu presupuesto">
-            </div>
-            <button class ="btn btn-danger" (click)="buscaRestaurante($event,precio)">
-               Buscar
-            </button>
+
 
             <app-restaurante-form *ngIf="res"></app-restaurante-form>
         </div>
@@ -21,6 +18,16 @@
     </div>
 </div>
 
-
-
-
+<hr>
+<div class="container">
+    <div class="form-group">
+        <input type="number" name="buscar" [(ngModel)]="precio" class="form-control"
+            placeholder="Ingresa tu presupuesto">
+            <br>
+            <button class="btn btn-info" (click)="buscaRestaurante($event,precio)">
+                Buscar
+            </button>        
+    </div>
+    
+   
+</div>
