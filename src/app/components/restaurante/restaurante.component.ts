@@ -24,6 +24,7 @@ export class RestauranteComponent implements OnInit {
   //Verifica si presionó añadir platillo
   adding: Boolean = false;
   restaurante = {} as Restaurante
+  platillos_a =[]
 
 
   constructor(public restauranteService:RestauranteService) {
@@ -38,12 +39,29 @@ export class RestauranteComponent implements OnInit {
       this.restaurantes = restaurantes;
       
     })
+
+  
   }
 
   deleteRestaurante(event,restaurante){
     if(confirm("¿Seguro qué desea eliminar es restaurante?")){
     this.restauranteService.deleteRestaurante(restaurante);
    }
+  }
+
+  deletePlatillo(event,restaurante,platillo){
+    //console.log('asa'+platillo.nombre)
+    if(confirm("¿Seguro qué desea eliminar este platillo?")){
+    this.restauranteService.deletePlatillo(restaurante,platillo);
+   }
+  }
+
+  getPlatillos(event,restaurante){
+    this.restauranteService.getPlatillos(restaurante).subscribe(platillos =>{
+      console.log(platillos)
+      this.platillos_a = platillos
+    })
+    
   }
 
   editRestaurante(event,restaurante){
