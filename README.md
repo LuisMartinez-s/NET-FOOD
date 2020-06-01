@@ -1,3 +1,7 @@
+# Descripción: 
+Aplicación web la cual permita al usuario teclear una cantidad dinero y a partir de ese presupuesto le muestre los restaurantes con los platillos que se ajusten a la cantidad ingresada.
+
+
 # AngularFirestore
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.3.
