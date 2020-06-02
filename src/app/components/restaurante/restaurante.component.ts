@@ -15,6 +15,7 @@ export class RestauranteComponent implements OnInit {
   platillo={}as Platillos
   //Arreglo para guardar restauranres y llamarlo en el html
   restaurantes=[];
+  todos_restaurantes=[];
   //Editar el restaurante
   editingRes:Restaurante;
   //Verifica si presionó edit
@@ -24,6 +25,7 @@ export class RestauranteComponent implements OnInit {
   //Verifica si presionó añadir platillo
   adding: Boolean = false;
   restaurante = {} as Restaurante
+  
   platillos_a =[]
 
 
@@ -36,7 +38,7 @@ export class RestauranteComponent implements OnInit {
     //AQUI SE MUESTRA LO QUE HAY EN LA COLECCIÓN
     this.restauranteService.getRestaurantes().subscribe(restaurantes =>{
       console.log(restaurantes)
-      this.restaurantes = restaurantes;
+      this.todos_restaurantes = restaurantes;
       
     })
 

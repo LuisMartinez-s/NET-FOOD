@@ -1,6 +1,6 @@
-<div *ngIf="restaurantes.length > 0; else norestaurante">
+<div *ngIf="todos_restaurantes.length > 0; else norestaurante">
     <ul class="list-group">
-        <li *ngFor="let p of restaurantes" class="list-group-item list-group-item-action">
+        <li *ngFor="let p of todos_restaurantes" class="list-group-item list-group-item-action">
             <h3>{{p.name}}</h3>
             <h5>{{p.lat}}</h5>
             <h5>{{p.lng}}</h5>
@@ -50,10 +50,10 @@
 
             </div>
             <button (click)="deleteRestaurante($event,p)" class="btn btn-danger">
-                Delete
+                Eliminar
             </button>
             <button (click)="editRestaurante($event,p)" class="btn btn-secondary">
-                Edit
+                Editar
             </button>
             <div *ngIf="editing && editingRes.id == p.id">
                 <form (ngSubmit)="updateRestaurante()">
@@ -70,7 +70,7 @@
                     </div>
 
                     <button type="submit" class="btn btn-success btn-block">
-                        Update
+                       Actualizar
                     </button>
 
                 </form>

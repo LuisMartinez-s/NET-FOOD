@@ -19,6 +19,7 @@ export class RestauranteService {
   platillosCollectionG:AngularFirestoreCollectionGroup<Platillos>;
   platillosCollection:AngularFirestoreCollection<Platillos>;
   restaurantes: Observable<Restaurante[]>;
+  todos_restaurantes: Observable<Restaurante[]>;
   platillos: Observable<Platillos[]>;
   platillosA: Platillos[]
   restauranteDoc: AngularFirestoreDocument<Restaurante>;
@@ -30,7 +31,7 @@ export class RestauranteService {
     //this.products = this.db.collection('products').valueChanges()
 
     this.restaurantesCollection = this.db.collection('restaurante');
-    this.restaurantes = this.restaurantesCollection.snapshotChanges().pipe(map(actions => {
+    this.todos_restaurantes = this.restaurantesCollection.snapshotChanges().pipe(map(actions => {
       return actions.map(a => {
         //as Product hace referencia a la interfaz en products.ts
         const data = a.payload.doc.data() as Restaurante
@@ -43,7 +44,7 @@ export class RestauranteService {
  
   //Método que retorna todos los Restaurantes
   getRestaurantes() {
-    return this.restaurantes
+    return this.todos_restaurantes
   }
 
 
